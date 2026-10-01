@@ -3,475 +3,2512 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="藍天咖啡，為手沖咖啡愛好者挑選當季精品咖啡豆，讓每一杯都清澈、明亮、值得細品。">
-  <title>藍天咖啡｜讓風味，慢慢抵達</title>
+  <title>時光生活誌｜漫步城市角落，拾起日常的微光詩篇</title>
+  <meta name="description" content="時光生活誌：分享生活中的城市景點、風格店家與旅人真實評價。以輕鬆探索為核心，探索老宅街區、綠意步道與質感店家，建立屬於自己的美好生活收藏清單。">
+  
+  <!-- Google Fonts: Noto Serif TC (文青標題) + Noto Sans TC (內文清晰) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@500;600;700;900&display=swap" rel="stylesheet">
+
   <style>
+    /* -------------------------------------------------------------
+       品牌色調定義 (奶油白、草綠、焦糖棕) & 基礎設計規範
+    ------------------------------------------------------------- */
     :root {
-      --navy: #062742;
-      --blue: #0c5b95;
-      --sky: #75c6e8;
-      --mist: #eaf5f7;
-      --cream: #fbfaf6;
-      --ink: #122534;
-      --muted: #607482;
-      --line: #d7e4e8;
-      --sand: #e5b66b;
-      --shadow: 0 18px 50px rgba(6, 39, 66, .13);
+      /* 奶油白系列 */
+      --cream-bg: #FAF7F2;
+      --cream-surface: #FFFFFF;
+      --cream-card: #FDFCF9;
+      --cream-border: #E8E2D8;
+      --cream-hover: #F3EFE7;
+
+      /* 草綠系列 */
+      --grass-green: #5E8258;
+      --grass-green-dark: #466341;
+      --grass-green-light: #EDF3EC;
+      --grass-green-subtle: rgba(94, 130, 88, 0.12);
+
+      /* 焦糖棕系列 */
+      --caramel-brown: #B5733C;
+      --caramel-brown-dark: #8F5425;
+      --caramel-brown-light: #FBF4ED;
+      --caramel-brown-subtle: rgba(181, 115, 60, 0.12);
+
+      /* 文字與中性色 */
+      --text-main: #2E332D;
+      --text-secondary: #5D635C;
+      --text-muted: #8B9189;
+      --shadow-sm: 0 4px 12px rgba(46, 51, 45, 0.05);
+      --shadow-md: 0 10px 25px rgba(46, 51, 45, 0.08);
+      --shadow-lg: 0 16px 36px rgba(46, 51, 45, 0.12);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-pill: 999px;
+      --transition: all 0.28s ease;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      color: var(--ink);
-      background: var(--cream);
-      font-family: "Noto Sans TC", sans-serif;
-      font-size: 16px;
-      line-height: 1.7;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--cream-bg);
+      color: var(--text-main);
+      font-family: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.75;
+      letter-spacing: 0.02em;
       -webkit-font-smoothing: antialiased;
     }
 
-    a { color: inherit; text-decoration: none; }
-    button, input { font: inherit; }
-    button { cursor: pointer; }
-    .wrap { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
-    .serif { font-family: "Noto Serif TC", serif; }
-    .eyebrow {
+    h1, h2, h3, h4, .brand-title, .serif-font {
+      font-family: "Noto Serif TC", Georgia, serif;
+      letter-spacing: 0.035em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+      border: none;
+      outline: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* -------------------------------------------------------------
+       導覽列 (Navbar)
+    ------------------------------------------------------------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--cream-border);
+      transition: var(--transition);
+    }
+
+    .navbar {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin: 0 0 13px;
-      color: var(--blue);
-      font-size: 11px;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .brand-badge {
+      width: 38px;
+      height: 38px;
+      background: var(--grass-green);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
       font-weight: 700;
-      letter-spacing: .18em;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 10px rgba(94, 130, 88, 0.28);
     }
-    .eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
-    .section-title {
-      margin: 0;
-      font: 700 clamp(30px, 4vw, 46px)/1.28 "Noto Serif TC", serif;
-      letter-spacing: .035em;
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
     }
-    .section-title em { color: var(--blue); font-style: normal; }
-    .section-copy { max-width: 48ch; margin: 20px 0 0; color: var(--muted); }
-    .button {
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .brand-sub {
+      font-size: 0.72rem;
+      color: var(--caramel-brown);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      position: relative;
+      padding: 6px 0;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--grass-green);
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: 100%;
+      height: 2px;
+      background: var(--grass-green);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .fav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--cream-surface);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-pill);
+      color: var(--text-main);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .fav-btn:hover {
+      border-color: var(--caramel-brown);
+      color: var(--caramel-brown);
+      transform: translateY(-1px);
+    }
+
+    .fav-count {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 11px;
-      min-height: 50px;
-      padding: 12px 23px;
-      border: 1px solid transparent;
-      border-radius: 2px;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: .04em;
-      transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
-    }
-    .button:hover { transform: translateY(-2px); }
-    .button:focus-visible, a:focus-visible { outline: 3px solid var(--sky); outline-offset: 4px; }
-    .button-primary { color: var(--navy); background: var(--sand); box-shadow: 0 9px 22px rgba(1, 35, 59, .2); }
-    .button-primary:hover { background: #f0c77f; }
-    .button-outline { color: #fff; border-color: rgba(255,255,255,.58); }
-    .button-outline:hover { background: rgba(255,255,255,.1); }
-    .arrow { font-size: 18px; line-height: 1; }
-
-    /* Header */
-    .site-header {
-      position: absolute;
-      z-index: 10;
-      width: 100%;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      background: var(--caramel-brown);
       color: #fff;
-      border-bottom: 1px solid rgba(255, 255, 255, .16);
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: var(--radius-pill);
     }
-    .nav { display: flex; align-items: center; justify-content: space-between; min-height: 78px; }
-    .brand { display: flex; align-items: center; gap: 12px; font: 700 20px/1 "Noto Serif TC", serif; letter-spacing: .11em; }
-    .brand-mark {
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      font-size: 1.5rem;
+      color: var(--text-main);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    /* -------------------------------------------------------------
+       首頁橫幅 (Hero Section)
+    ------------------------------------------------------------- */
+    .hero-section {
+      padding: 56px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-container {
       display: grid;
-      width: 29px;
-      height: 29px;
-      place-items: center;
-      border: 1px solid var(--sky);
-      border-radius: 50%;
-      color: var(--sky);
-      font: 700 19px/1 "Playfair Display", serif;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 48px;
     }
-    .brand small { display: block; margin-top: 5px; color: rgba(255,255,255,.64); font: 600 8px/1 sans-serif; letter-spacing: .21em; }
-    .nav-links { display: flex; align-items: center; gap: 29px; font-size: 13px; font-weight: 500; }
-    .nav-links a { position: relative; padding: 6px 0; }
-    .nav-links a:not(.nav-cta)::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: var(--sky); transform: scaleX(0); transform-origin: right; transition: transform .22s; }
-    .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); transform-origin: left; }
-    .nav-cta { padding: 8px 16px !important; border: 1px solid rgba(255,255,255,.55); }
-    .nav-cta:hover { color: var(--navy); background: #fff; }
-    .menu-toggle { display: none; border: 0; color: #fff; background: transparent; }
 
-    /* Hero */
-    .hero { position: relative; min-height: 704px; overflow: hidden; color: #fff; background: var(--navy); }
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      opacity: .36;
-      background: radial-gradient(circle at 76% 45%, rgba(55, 167, 212, .75), transparent 23%), linear-gradient(117deg, rgba(4,25,45,.22) 0 48%, rgba(5,47,78,.82) 78%);
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--grass-green-light);
+      color: var(--grass-green);
+      font-size: 0.82rem;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      margin-bottom: 20px;
+      border: 1px solid rgba(94, 130, 88, 0.2);
     }
-    .hero::after {
+
+    .hero-tag::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--grass-green);
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.25;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 20px;
+    }
+
+    .hero-title em {
+      color: var(--grass-green);
+      font-style: normal;
+      position: relative;
+    }
+
+    .hero-title em::after {
       content: "";
       position: absolute;
+      bottom: 4px;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: var(--grass-green-subtle);
+      z-index: -1;
+      border-radius: 4px;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 520px;
+      line-height: 1.8;
+    }
+
+    /* 搜尋與快速標籤 */
+    .hero-search-box {
+      background: var(--cream-surface);
+      border: 1px solid var(--cream-border);
+      padding: 6px 6px 6px 18px;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 500px;
+      transition: var(--transition);
+    }
+
+    .hero-search-box:focus-within {
+      border-color: var(--grass-green);
+      box-shadow: 0 0 0 3px var(--grass-green-subtle);
+    }
+
+    .search-icon {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .hero-search-input {
+      flex: 1;
+      background: transparent;
+      color: var(--text-main);
+      font-size: 0.95rem;
+    }
+
+    .hero-search-btn {
+      padding: 10px 22px;
+      background: var(--grass-green);
+      color: #fff;
+      border-radius: var(--radius-pill);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-search-btn:hover {
+      background: var(--grass-green-dark);
+      transform: scale(1.02);
+    }
+
+    .hero-quick-tags {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .quick-tag-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .quick-tag {
+      font-size: 0.8rem;
+      color: var(--caramel-brown);
+      background: var(--caramel-brown-light);
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .quick-tag:hover {
+      background: var(--caramel-brown);
+      color: #fff;
+    }
+
+    /* Hero 圖文視覺板 */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-card-stack {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-main-img {
+      width: 82%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      border: 6px solid var(--cream-surface);
+      transform: rotate(-2deg);
+      transition: var(--transition);
+    }
+
+    .hero-main-img:hover {
+      transform: rotate(0deg) scale(1.02);
+    }
+
+    .hero-float-card {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--cream-border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: floatSlow 5s ease-in-out infinite;
+    }
+
+    .float-card-1 {
+      bottom: 24px;
+      left: 0;
+      animation-delay: 0s;
+    }
+
+    .float-card-2 {
+      top: 24px;
+      right: 12px;
+      animation-delay: 2.5s;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .float-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .float-icon.green { background: var(--grass-green-light); color: var(--grass-green); }
+    .float-icon.caramel { background: var(--caramel-brown-light); color: var(--caramel-brown); }
+
+    .float-text h5 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .float-text p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* -------------------------------------------------------------
+       公用區塊標題 (Section Header)
+    ------------------------------------------------------------- */
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 44px;
+    }
+
+    .section-subtitle {
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--caramel-brown);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.3rem);
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* -------------------------------------------------------------
+       功能一：景點探索 (Spot Exploration)
+    ------------------------------------------------------------- */
+    .explore-section {
+      padding: 72px 0 80px;
+      background: var(--cream-bg);
+      border-top: 1px solid var(--cream-border);
+    }
+
+    /* 分類濾鏡列 */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 38px;
+    }
+
+    .filter-chip {
+      padding: 8px 18px;
+      background: var(--cream-surface);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-chip:hover {
+      border-color: var(--grass-green);
+      color: var(--grass-green);
+      background: var(--grass-green-light);
+    }
+
+    .filter-chip.active {
+      background: var(--grass-green);
+      color: #fff;
+      border-color: var(--grass-green);
+      box-shadow: 0 4px 12px rgba(94, 130, 88, 0.25);
+    }
+
+    /* 景點卡片網格 */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .card {
+      background: var(--cream-surface);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(94, 130, 88, 0.35);
+    }
+
+    .card-media {
+      position: relative;
+      height: 210px;
+      overflow: hidden;
+      background: #e2ddd5;
+    }
+
+    .card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .card:hover .card-media img {
+      transform: scale(1.06);
+    }
+
+    .card-category-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 4px 10px;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(6px);
+      color: var(--grass-green-dark);
+      font-size: 0.74rem;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.05em;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .card-fav-toggle {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(6px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-fav-toggle:hover {
+      transform: scale(1.12);
+      color: #e63946;
+    }
+
+    .card-fav-toggle.favorited {
+      color: #e63946;
+      background: #fff;
+    }
+
+    .card-fav-toggle svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-meta-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .card-location {
+      font-size: 0.78rem;
+      color: var(--caramel-brown);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .card-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .star-icon {
+      color: #f4a261;
+      font-size: 0.85rem;
+    }
+
+    .card-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+      margin-bottom: 16px;
+    }
+
+    .tag-item {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      background: var(--cream-bg);
+      color: var(--text-secondary);
+      border-radius: 4px;
+      border: 1px solid var(--cream-border);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--cream-border);
+      padding-top: 14px;
+    }
+
+    .card-btn-view {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--grass-green);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      background: transparent;
+      transition: var(--transition);
+    }
+
+    .card-btn-view:hover {
+      color: var(--grass-green-dark);
+      transform: translateX(3px);
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--cream-card);
+      border: 1px dashed var(--cream-border);
+      border-radius: var(--radius-md);
+    }
+
+    .empty-state-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      color: var(--text-muted);
+    }
+
+    /* -------------------------------------------------------------
+       功能二：店家推薦 (Featured Shops)
+    ------------------------------------------------------------- */
+    .shops-section {
+      padding: 80px 0 90px;
+      background: var(--cream-card);
+      position: relative;
+    }
+
+    .shop-feature-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--cream-surface);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 32px;
+      transition: var(--transition);
+    }
+
+    .shop-feature-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--caramel-brown);
+    }
+
+    .shop-img-box {
+      height: 100%;
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shop-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .shop-feature-card:hover .shop-img-box img {
+      transform: scale(1.05);
+    }
+
+    .shop-badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      padding: 5px 12px;
+      background: var(--caramel-brown);
+      color: #fff;
+      font-size: 0.76rem;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .shop-content {
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .shop-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .shop-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .shop-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .shop-quote {
+      font-size: 0.95rem;
+      color: var(--caramel-brown);
+      font-style: italic;
+      margin-bottom: 14px;
+      font-weight: 500;
+      border-left: 3px solid var(--caramel-brown);
+      padding-left: 12px;
+    }
+
+    .shop-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 22px;
+    }
+
+    .shop-specialties {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .specialty-tag {
+      font-size: 0.76rem;
+      padding: 4px 10px;
+      background: var(--grass-green-light);
+      color: var(--grass-green-dark);
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+    }
+
+    .shop-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-primary {
+      padding: 10px 22px;
+      background: var(--grass-green);
+      color: #fff;
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary:hover {
+      background: var(--grass-green-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      padding: 10px 20px;
+      background: var(--cream-surface);
+      color: var(--text-main);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--caramel-brown);
+      color: var(--caramel-brown);
+    }
+
+    /* 店家精選清單三小格 */
+    .shops-subgrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .sub-shop-card {
+      background: var(--cream-surface);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sub-shop-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--caramel-brown);
+    }
+
+    .sub-shop-type {
+      font-size: 0.74rem;
+      color: var(--caramel-brown);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .sub-shop-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .sub-shop-info {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .sub-shop-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--cream-border);
+      padding-top: 12px;
+      font-size: 0.8rem;
+    }
+
+    .sub-shop-hours {
+      color: var(--text-muted);
+    }
+
+    /* -------------------------------------------------------------
+       功能三：旅人評價與即時發布 (Reviews & Feedback)
+    ------------------------------------------------------------- */
+    .review-section {
+      padding: 80px 0 90px;
+      background: var(--cream-bg);
+      border-top: 1px solid var(--cream-border);
+    }
+
+    .review-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* 左側：熱門評價清單 */
+    .reviews-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .review-item-card {
+      background: var(--cream-surface);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .review-item-card:hover {
+      border-color: rgba(94, 130, 88, 0.4);
+      box-shadow: var(--shadow-md);
+    }
+
+    .review-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .reviewer-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .reviewer-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--grass-green-light);
+      color: var(--grass-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      border: 1px solid rgba(94, 130, 88, 0.2);
+    }
+
+    .reviewer-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .review-spot-name {
+      font-size: 0.78rem;
+      color: var(--caramel-brown);
+      font-weight: 500;
+    }
+
+    .review-stars {
+      color: #f4a261;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+    }
+
+    .review-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .review-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    /* 右側：評價表單 */
+    .review-form-card {
+      background: var(--cream-card);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 96px;
+    }
+
+    .form-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .form-desc {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      margin-bottom: 22px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--cream-surface);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--grass-green);
+      box-shadow: 0 0 0 3px var(--grass-green-subtle);
+    }
+
+    /* 星等選擇器 */
+    .star-rating-select {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1.6rem;
+      color: #ddd;
+      cursor: pointer;
+    }
+
+    .star-btn {
+      background: transparent;
+      color: #cfc8bd;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 0 2px;
+    }
+
+    .star-btn.active, .star-btn:hover, .star-btn.hover {
+      color: #f4a261;
+      transform: scale(1.15);
+    }
+
+    .rating-hint {
+      font-size: 0.8rem;
+      color: var(--caramel-brown);
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .btn-submit-review {
+      width: 100%;
+      padding: 12px;
+      background: var(--caramel-brown);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 14px rgba(181, 115, 60, 0.25);
+    }
+
+    .btn-submit-review:hover {
+      background: var(--caramel-brown-dark);
+      transform: translateY(-1px);
+    }
+
+    /* -------------------------------------------------------------
+       核心備註：我的收藏抽屜 (Drawer) & Modal
+    ------------------------------------------------------------- */
+    .drawer-overlay {
+      position: fixed;
       top: 0;
-      right: -180px;
-      width: 760px;
-      height: 760px;
-      border: 1px solid rgba(153,220,240,.22);
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(46, 51, 45, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(420px, 100%);
+      height: 100%;
+      background: var(--cream-surface);
+      z-index: 1001;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    }
+
+    .drawer-overlay.active .drawer {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--cream-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .drawer-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .drawer-close {
+      background: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: var(--transition);
+      padding: 4px;
+    }
+
+    .drawer-close:hover {
+      color: var(--text-main);
+    }
+
+    .drawer-body {
+      padding: 20px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .fav-item {
+      display: flex;
+      gap: 14px;
+      padding: 12px;
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-sm);
+      background: var(--cream-card);
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .fav-item:hover {
+      border-color: var(--grass-green);
+    }
+
+    .fav-item-img {
+      width: 70px;
+      height: 70px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    .fav-item-info {
+      flex: 1;
+    }
+
+    .fav-item-category {
+      font-size: 0.7rem;
+      color: var(--grass-green);
+      font-weight: 600;
+    }
+
+    .fav-item-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin: 2px 0 4px;
+    }
+
+    .fav-item-loc {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .fav-item-remove {
+      background: none;
+      color: #c95151;
+      cursor: pointer;
+      font-size: 0.78rem;
+      padding: 2px 6px;
+      align-self: flex-start;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .fav-item-remove:hover {
+      background: #fde8e8;
+    }
+
+    .drawer-footer {
+      padding: 20px;
+      border-top: 1px solid var(--cream-border);
+      background: var(--cream-bg);
+      text-align: center;
+    }
+
+    /* 景點詳情 Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(46, 51, 45, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 1100;
+      opacity: 0;
+      visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: var(--transition);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: var(--cream-surface);
+      border-radius: var(--radius-lg);
+      max-width: 620px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--cream-border);
+      position: relative;
+      transform: scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-img-top {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .modal-body {
+      padding: 28px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      box-shadow: 0 0 0 62px rgba(153,220,240,.045), 0 0 0 180px rgba(153,220,240,.025);
-    }
-    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.02fr .98fr; gap: 45px; align-items: center; min-height: 704px; padding: 122px 0 72px; }
-    .hero .eyebrow { color: var(--sky); }
-    .hero-title { max-width: 13ch; margin: 0; font: 900 clamp(42px, 5.5vw, 68px)/1.22 "Noto Serif TC", serif; letter-spacing: .075em; }
-    .hero-title .blue { color: var(--sky); }
-    .hero-lede { max-width: 42ch; margin: 26px 0 32px; color: rgba(255,255,255,.78); font-size: 16px; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; }
-    .hero-note { margin-top: 28px; color: rgba(255,255,255,.52); font-size: 11px; letter-spacing: .1em; }
-    .hero-art { position: relative; min-height: 453px; }
-    .sun { position: absolute; top: 2%; right: 14%; width: 166px; height: 166px; border-radius: 50%; background: #93d6e6; box-shadow: 0 0 65px rgba(145,215,233,.36); }
-    .mountain { position: absolute; right: -4%; bottom: 2%; width: 98%; height: 70%; clip-path: polygon(0 73%, 23% 42%, 37% 59%, 61% 10%, 73% 29%, 84% 0, 100% 37%, 100% 100%, 0 100%); background: linear-gradient(135deg, #0b7eac, #06446f 70%); opacity: .85; }
-    .mountain::after { content: ""; position: absolute; inset: 0; background: linear-gradient(155deg, transparent 38%, rgba(2,35,58,.72) 38.5% 100%); }
-    .coffee-vessel { position: absolute; z-index: 2; right: 17%; bottom: 0; width: 255px; filter: drop-shadow(0 22px 21px rgba(0,0,0,.23)); }
-    .dripper { position: relative; width: 205px; height: 132px; margin: 0 auto -5px; border: 4px solid #e9f8fa; border-top-width: 6px; border-radius: 10px 10px 44% 44%; background: linear-gradient(115deg, rgba(123,206,225,.5), rgba(26,118,161,.23)); clip-path: polygon(0 0,100% 0,78% 100%,22% 100%); }
-    .dripper::after { content: ""; position: absolute; inset: 18px 16px 0; border-top: 1px solid rgba(255,255,255,.6); border-left: 1px solid rgba(255,255,255,.25); transform: skewX(-17deg); }
-    .carafe { position: relative; width: 170px; height: 181px; margin: 0 auto; border: 4px solid #e9f8fa; border-radius: 9px 9px 39% 39% / 9px 9px 19% 19%; background: linear-gradient(90deg, rgba(110,211,229,.26), rgba(1,52,87,.52)); }
-    .carafe::before { content: ""; position: absolute; top: -16px; left: 27px; width: 108px; height: 20px; border: 4px solid #e9f8fa; border-bottom: 0; border-radius: 50% 50% 0 0; }
-    .carafe::after { content: ""; position: absolute; right: 16px; bottom: 24px; left: 16px; height: 60px; border-radius: 3px 3px 26px 26px; background: linear-gradient(90deg, rgba(133,67,26,.84), rgba(76,33,9,.92)); }
-    .art-label { position: absolute; z-index: 3; top: 50%; right: 2%; width: 114px; padding-left: 12px; border-left: 1px solid var(--sky); color: rgba(255,255,255,.78); font-size: 10px; line-height: 1.7; letter-spacing: .1em; }
-    .art-label strong { display: block; color: var(--sky); font: 600 20px/1 "Playfair Display", serif; }
-    .scroll-line { position: absolute; bottom: 23px; left: max(24px, calc((100% - 1120px) / 2)); z-index: 2; display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,.56); font-size: 10px; letter-spacing: .15em; }
-    .scroll-line::before { content: ""; width: 38px; height: 1px; background: currentColor; }
-
-    /* Intro */
-    .intro { padding: 118px 0; background: #fff; }
-    .intro-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(45px, 8vw, 105px); align-items: center; }
-    .intro-stamp { position: relative; min-height: 355px; }
-    .stamp-circle { position: absolute; inset: 13px auto auto 0; display: grid; width: 290px; height: 290px; place-items: center; border: 1px solid #9dd7e7; border-radius: 50%; color: var(--blue); text-align: center; }
-    .stamp-circle::before { content: ""; position: absolute; inset: 14px; border: 1px dashed #a5d9e6; border-radius: 50%; }
-    .stamp-circle strong { display: block; font: 700 43px/1 "Playfair Display", serif; letter-spacing: -.04em; }
-    .stamp-circle span { display: block; margin-top: 8px; font-size: 11px; font-weight: 700; letter-spacing: .14em; }
-    .stamp-card { position: absolute; right: 0; bottom: 0; width: 216px; padding: 21px 23px; color: #fff; background: var(--blue); box-shadow: var(--shadow); }
-    .stamp-card p { margin: 0; font-size: 12px; line-height: 1.8; }
-    .stamp-card b { display: block; margin-bottom: 8px; color: var(--sky); font: 600 12px/1 "Playfair Display", serif; letter-spacing: .14em; }
-    .intro .section-copy { font-size: 16px; }
-    .intro-link { display: inline-flex; gap: 10px; margin-top: 28px; padding-bottom: 4px; border-bottom: 1px solid var(--blue); color: var(--blue); font-size: 14px; font-weight: 700; }
-
-    /* Coffees */
-    .coffee-section { padding: 110px 0 120px; background: var(--mist); }
-    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 43px; }
-    .section-head .section-copy { max-width: 35ch; margin: 0; font-size: 14px; }
-    .coffee-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 19px; }
-    .coffee-card { position: relative; min-height: 384px; overflow: hidden; color: #fff; background: var(--navy); box-shadow: var(--shadow); }
-    .coffee-card::before { content: ""; position: absolute; right: -63px; bottom: -87px; width: 238px; height: 238px; border: 1px solid rgba(255,255,255,.29); border-radius: 50%; }
-    .coffee-card::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(160deg, transparent 42%, rgba(0,0,0,.28)); pointer-events: none; }
-    .coffee-card:nth-child(2) { background: #106396; }
-    .coffee-card:nth-child(3) { background: #164c68; }
-    .coffee-content { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 384px; padding: 29px; }
-    .coffee-number { color: var(--sky); font: 600 13px/1 "Playfair Display", serif; letter-spacing: .08em; }
-    .coffee-origin { margin: auto 0 7px; color: rgba(255,255,255,.63); font-size: 11px; font-weight: 600; letter-spacing: .14em; }
-    .coffee-card h3 { margin: 0; font: 700 27px/1.35 "Noto Serif TC", serif; letter-spacing: .05em; }
-    .coffee-notes { margin: 11px 0 22px; color: rgba(255,255,255,.75); font-size: 13px; }
-    .coffee-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.25); }
-    .price { font-size: 14px; font-weight: 700; }
-    .add-button { padding: 5px 0; border: 0; color: #fff; background: none; font-size: 12px; font-weight: 700; letter-spacing: .07em; }
-    .add-button:hover { color: var(--sand); }
-
-    /* Brew process */
-    .brew { overflow: hidden; padding: 118px 0; background: #fff; }
-    .brew-grid { display: grid; grid-template-columns: .93fr 1.07fr; gap: clamp(44px, 9vw, 112px); align-items: center; }
-    .brew-visual { position: relative; min-height: 396px; border: 1px solid var(--line); background: linear-gradient(140deg, #f4fafb 0 50%, #e5f4f7 50%); }
-    .brew-visual::before { content: ""; position: absolute; top: 35px; left: 34px; width: 70px; height: 1px; background: var(--blue); box-shadow: 0 9px 0 var(--blue), 0 18px 0 var(--blue); }
-    .pour-ring { position: absolute; top: 71px; right: 48px; width: 240px; height: 240px; border: 35px solid rgba(12,91,149,.13); border-radius: 50%; }
-    .pour-ring::after { content: ""; position: absolute; top: 45px; left: 45px; width: 80px; height: 80px; border: 3px solid var(--blue); border-radius: 50%; }
-    .brew-v60 { position: absolute; bottom: 35px; left: 51%; width: 178px; height: 150px; border: 4px solid var(--blue); background: rgba(255,255,255,.54); clip-path: polygon(0 0,100% 0,73% 100%,27% 100%); transform: translateX(-50%); }
-    .brew-v60::before { content: ""; position: absolute; top: 14px; right: 16px; bottom: 0; left: 16px; border-left: 1px solid #8dcce0; border-right: 1px solid #8dcce0; transform: skewX(-11deg); }
-    .brew-caption { position: absolute; right: 25px; bottom: 21px; color: var(--blue); font: 600 10px/1.4 "Playfair Display", serif; letter-spacing: .13em; text-align: right; }
-    .brew-steps { display: grid; gap: 0; margin: 28px 0 0; padding: 0; list-style: none; }
-    .brew-steps li { display: grid; grid-template-columns: 43px 1fr; gap: 15px; padding: 17px 0; border-top: 1px solid var(--line); }
-    .brew-steps li:last-child { border-bottom: 1px solid var(--line); }
-    .step-no { color: var(--blue); font: 600 15px/1.7 "Playfair Display", serif; }
-    .step-copy b { display: block; font-size: 15px; }
-    .step-copy span { color: var(--muted); font-size: 13px; }
-
-    /* CTA and Footer */
-    .visit { position: relative; overflow: hidden; padding: 96px 0; color: #fff; background: var(--navy); text-align: center; }
-    .visit::before, .visit::after { content: ""; position: absolute; width: 370px; height: 370px; border: 1px solid rgba(117,198,232,.21); border-radius: 50%; }
-    .visit::before { top: -225px; left: -90px; }
-    .visit::after { right: -125px; bottom: -235px; }
-    .visit .wrap { position: relative; z-index: 1; }
-    .visit .eyebrow { justify-content: center; color: var(--sky); }
-    .visit .section-title { font-size: clamp(30px, 4vw, 45px); }
-    .visit p:not(.eyebrow) { max-width: 48ch; margin: 19px auto 28px; color: rgba(255,255,255,.73); }
-    .subscribe { display: flex; max-width: 500px; margin: 0 auto; border: 1px solid rgba(255,255,255,.5); }
-    .subscribe input { min-width: 0; flex: 1; padding: 13px 17px; border: 0; outline: none; color: #fff; background: transparent; }
-    .subscribe input::placeholder { color: rgba(255,255,255,.55); }
-    .subscribe button { padding: 0 22px; border: 0; color: var(--navy); background: var(--sand); font-size: 13px; font-weight: 700; white-space: nowrap; }
-    .subscribe button:hover { background: #f0c77f; }
-    footer { color: rgba(255,255,255,.67); background: #031c31; }
-    .footer-top { display: grid; grid-template-columns: 1.7fr 1fr 1fr; gap: 40px; padding: 58px 0 38px; }
-    .footer-brand { color: #fff; }
-    .footer-brand p { max-width: 31ch; margin: 16px 0 0; font-size: 13px; }
-    .footer-heading { margin: 0 0 15px; color: var(--sky); font-size: 11px; font-weight: 700; letter-spacing: .14em; }
-    .footer-list { margin: 0; padding: 0; list-style: none; font-size: 13px; }
-    .footer-list li + li { margin-top: 8px; }
-    .footer-list a:hover { color: #fff; }
-    .footer-bottom { display: flex; justify-content: space-between; gap: 24px; padding: 17px 0; border-top: 1px solid rgba(255,255,255,.14); color: rgba(255,255,255,.43); font-size: 11px; letter-spacing: .05em; }
-
-    .toast { position: fixed; right: 22px; bottom: 22px; z-index: 20; max-width: min(330px, calc(100% - 44px)); padding: 13px 18px; border-left: 3px solid var(--sand); color: #fff; background: var(--navy); box-shadow: var(--shadow); opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity .25s, transform .25s; font-size: 13px; }
-    .toast.show { opacity: 1; transform: translateY(0); }
-
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    @media (max-width: 820px) {
-      .nav { min-height: 68px; }
-      .menu-toggle { display: block; width: 42px; height: 42px; font-size: 23px; }
-      .nav-links { position: absolute; top: 68px; right: 0; left: 0; display: grid; gap: 0; max-height: 0; overflow: hidden; background: #05233c; transition: max-height .27s ease; }
-      .nav-links.open { max-height: 300px; border-top: 1px solid rgba(255,255,255,.12); }
-      .nav-links a { padding: 13px 24px; border-bottom: 1px solid rgba(255,255,255,.09); }
-      .nav-links .nav-cta { margin: 11px 24px; text-align: center; }
-      .hero, .hero-grid { min-height: 710px; }
-      .hero-grid { grid-template-columns: 1fr; padding-top: 115px; }
-      .hero-art { min-height: 278px; margin-top: -35px; }
-      .sun { right: 14%; width: 114px; height: 114px; }
-      .mountain { width: 82%; height: 92%; }
-      .coffee-vessel { right: 15%; transform: scale(.72); transform-origin: bottom right; }
-      .art-label { top: 44%; right: 1%; }
-      .intro-grid, .brew-grid { grid-template-columns: 1fr; }
-      .intro-stamp { max-width: 510px; width: 100%; }
-      .coffee-grid { grid-template-columns: 1fr 1fr; }
-      .coffee-card:last-child { grid-column: span 2; }
-      .footer-top { grid-template-columns: 1.4fr 1fr; }
-      .footer-brand { grid-column: span 2; }
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(6px);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
     }
 
-    @media (max-width: 560px) {
-      .wrap { width: min(100% - 34px, 1120px); }
-      .hero, .hero-grid { min-height: 680px; }
-      .hero-grid { padding-top: 100px; padding-bottom: 48px; }
-      .hero-title { font-size: 40px; }
-      .hero-lede { margin: 18px 0 23px; font-size: 14px; }
-      .hero-art { min-height: 240px; }
-      .art-label { display: none; }
-      .scroll-line { bottom: 12px; left: 17px; }
-      .intro, .coffee-section, .brew { padding: 76px 0; }
-      .stamp-circle { width: 245px; height: 245px; }
-      .stamp-card { width: 185px; padding: 16px; }
-      .section-head { display: block; }
-      .section-head .section-copy { margin-top: 15px; }
-      .coffee-grid { grid-template-columns: 1fr; }
-      .coffee-card, .coffee-card:last-child { grid-column: auto; min-height: 330px; }
-      .coffee-content { min-height: 330px; }
-      .brew-visual { min-height: 310px; }
-      .pour-ring { top: 48px; right: 25px; width: 190px; height: 190px; border-width: 27px; }
-      .visit { padding: 76px 0; }
-      .subscribe { display: block; border: 0; }
-      .subscribe input { width: 100%; border: 1px solid rgba(255,255,255,.5); }
-      .subscribe button { width: 100%; min-height: 48px; margin-top: 9px; }
-      .footer-top { grid-template-columns: 1fr; gap: 30px; }
-      .footer-brand { grid-column: auto; }
-      .footer-bottom { display: block; }
-      .footer-bottom span + span { display: block; margin-top: 6px; }
+    /* Toast 訊息通知 */
+    .toast-box {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text-main);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-lg);
+      font-size: 0.9rem;
+      font-weight: 500;
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
-      .reveal { opacity: 1; transform: none; }
+    .toast-box.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* -------------------------------------------------------------
+       頁尾 (Footer)
+    ------------------------------------------------------------- */
+    .site-footer {
+      background: #252A26;
+      color: #D3D8D2;
+      padding: 64px 0 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand h4 {
+      font-size: 1.4rem;
+      color: #FAF7F2;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      font-size: 0.88rem;
+      color: #A1A8A0;
+      max-width: 340px;
+      line-height: 1.7;
+    }
+
+    .footer-col h5 {
+      font-size: 0.95rem;
+      color: #FAF7F2;
+      margin-bottom: 16px;
+      font-family: "Noto Sans TC", sans-serif;
+      font-weight: 600;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      font-size: 0.86rem;
+      color: #A1A8A0;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #8A9189;
+    }
+
+    /* -------------------------------------------------------------
+       響應式設計 (Responsive Styles)
+    ------------------------------------------------------------- */
+    @media (max-width: 992px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .hero-card-stack {
+        height: 360px;
+      }
+      .shop-feature-card {
+        grid-template-columns: 1fr;
+      }
+      .shops-subgrid {
+        grid-template-columns: 1fr;
+      }
+      .review-layout {
+        grid-template-columns: 1fr;
+      }
+      .review-form-card {
+        position: static;
+      }
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        background: var(--cream-surface);
+        flex-direction: column;
+        padding: 20px;
+        border-bottom: 1px solid var(--cream-border);
+        box-shadow: var(--shadow-md);
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <header class="site-header" id="top">
-    <nav class="nav wrap" aria-label="主要導覽">
-      <a class="brand" href="#top" aria-label="回到藍天咖啡首頁">
-        <span class="brand-mark">B</span>
-        <span>藍天咖啡<small>BLUE SKY COFFEE</small></span>
+
+  <!-- =========================================================
+       頁首導覽列 (Header & Navigation)
+  ========================================================= -->
+  <header class="site-header">
+    <div class="container navbar">
+      <!-- 品牌 LOGO -->
+      <a href="#" class="brand-logo">
+        <div class="brand-badge">時</div>
+        <div class="brand-text">
+          <span class="brand-title">時光生活誌</span>
+          <span class="brand-sub">CHRONICLE OF CITY LIFE</span>
+        </div>
       </a>
-      <button class="menu-toggle" type="button" aria-label="開啟導覽選單" aria-expanded="false" aria-controls="navLinks">☰</button>
-      <div class="nav-links" id="navLinks">
-        <a href="#story">我們的堅持</a>
-        <a href="#coffee">本季選豆</a>
-        <a href="#brew">沖煮日常</a>
-        <a class="nav-cta" href="#visit">訂閱風味通信</a>
+
+      <!-- 導覽連結 -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" class="nav-link active">首頁</a></li>
+        <li><a href="#explore" class="nav-link">景點探索</a></li>
+        <li><a href="#shops" class="nav-link">店家推薦</a></li>
+        <li><a href="#reviews" class="nav-link">旅人評價</a></li>
+      </ul>
+
+      <!-- 右側動作：收藏抽屜按鈕 + 行動版選單 -->
+      <div class="nav-actions">
+        <button class="fav-btn" id="openFavBtn" aria-label="查看我的收藏">
+          <span>🔖 收藏清單</span>
+          <span class="fav-count" id="favCountBadge">0</span>
+        </button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="切換選單">☰</button>
       </div>
-    </nav>
+    </div>
   </header>
 
-  <main>
-    <section class="hero" aria-labelledby="heroTitle">
-      <div class="hero-grid wrap">
-        <div class="reveal">
-          <p class="eyebrow">HAND BREWED · SLOWLY ROASTED</p>
-          <h1 class="hero-title" id="heroTitle">讓風味，<br>在<span class="blue">藍天</span>下<br>慢慢抵達。</h1>
-          <p class="hero-lede">藍天咖啡為喜歡手沖的你，挑選值得細品的單一產區咖啡豆。從第一縷花香，到最後一口回甘，每一杯都有自己的晴朗天氣。</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#coffee">探索本季風味 <span class="arrow">→</span></a>
-            <a class="button button-outline" href="#story">認識藍天</a>
+  <!-- =========================================================
+       首頁橫幅區 (Hero Section)
+  ========================================================= -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-container">
+      <!-- 左側文案與搜尋 -->
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span>城市探索專欄・日日微旅行</span>
+        </div>
+        <h1 class="hero-title">
+          漫步城市角落，<br>
+          拾起日常的<em>微光詩篇</em>
+        </h1>
+        <p class="hero-desc">
+          為喜愛探索新景點與生活風格的你，精選老宅街區、綠意散策步道與溫暖獨立店家。放慢腳步，在城市的微光時光中，隨心發掘並建立屬於自己的靈感收藏清單。
+        </p>
+
+        <!-- 景點搜尋列 -->
+        <div class="hero-search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="heroSearchInput" class="hero-search-input" placeholder="搜尋景點、咖啡香、老宅選物或藝文角落..." autocomplete="off">
+          <button class="hero-search-btn" id="heroSearchBtn">探索</button>
+        </div>
+
+        <!-- 快速標籤 -->
+        <div class="hero-quick-tags">
+          <span class="quick-tag-label">熱門關鍵字：</span>
+          <span class="quick-tag" onclick="filterByTag('老宅')">#老宅咖啡</span>
+          <span class="quick-tag" onclick="filterByTag('步道')">#綠意秘境</span>
+          <span class="quick-tag" onclick="filterByTag('書店')">#獨立書店</span>
+          <span class="quick-tag" onclick="filterByTag('日落')">#夕陽展望</span>
+        </div>
+      </div>
+
+      <!-- 右側視覺拼貼 -->
+      <div class="hero-visual">
+        <div class="hero-card-stack">
+          <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80" alt="文青綠意與木質空間" class="hero-main-img">
+          
+          <!-- 飄浮卡片 1 -->
+          <div class="hero-float-card float-card-1">
+            <div class="float-icon green">🌿</div>
+            <div class="float-text">
+              <h5>清晨綠意散策</h5>
+              <p>遠離喧囂，感受微風</p>
+            </div>
           </div>
-          <p class="hero-note">TAIPEI · TAIWAN · EST. 2018</p>
-        </div>
-        <div class="hero-art" aria-hidden="true">
-          <div class="sun"></div>
-          <div class="mountain"></div>
-          <div class="coffee-vessel"><div class="dripper"></div><div class="carafe"></div></div>
-          <p class="art-label"><strong>92°C</strong>理想水溫<br>細細喚醒香氣</p>
-        </div>
-      </div>
-      <p class="scroll-line">SCROLL TO DISCOVER</p>
-    </section>
 
-    <section class="intro" id="story" aria-labelledby="storyTitle">
-      <div class="intro-grid wrap">
-        <div class="intro-stamp reveal" aria-hidden="true">
-          <div class="stamp-circle"><div><strong>慢一點，<br>更清楚。</strong><span>LET THE FLAVOUR SPEAK</span></div></div>
-          <div class="stamp-card"><b>BLUE SKY NOTE</b><p>一杯好咖啡，從來不是匆忙完成的事。</p></div>
-        </div>
-        <div class="reveal">
-          <p class="eyebrow">OUR PHILOSOPHY</p>
-          <h2 class="section-title" id="storyTitle">在一杯之間，<br>看見產地的<em>晴朗</em>。</h2>
-          <p class="section-copy">我們相信，精品咖啡的美好不該被複雜掩蓋。以小批次烘焙留住豆子的個性，再用穩定、誠實的手沖，讓風土與時間在杯中變得清晰。</p>
-          <p class="section-copy">給懂得放慢腳步的人，也給每一個想重新認識咖啡的人。</p>
-          <a class="intro-link" href="#brew">看看我們如何沖煮 <span>→</span></a>
-        </div>
-      </div>
-    </section>
-
-    <section class="coffee-section" id="coffee" aria-labelledby="coffeeTitle">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div><p class="eyebrow">SEASONAL SELECTION</p><h2 class="section-title" id="coffeeTitle">今天，想喝哪一片<em>藍天</em>？</h2></div>
-          <p class="section-copy">三款當季單品，為不同的晨光、午後與靜夜而選。</p>
-        </div>
-        <div class="coffee-grid">
-          <article class="coffee-card reveal">
-            <div class="coffee-content">
-              <span class="coffee-number">01 / BRIGHT</span>
-              <p class="coffee-origin">ETHIOPIA · YIRGACHEFFE</p>
-              <h3>衣索比亞<br>耶加雪菲</h3>
-              <p class="coffee-notes">白花、佛手柑、蜂蜜</p>
-              <div class="coffee-bottom"><span class="price">NT$ 520 / 200g</span><button class="add-button" type="button" data-coffee="衣索比亞・耶加雪菲">加入收藏 ＋</button></div>
+          <!-- 飄浮卡片 2 -->
+          <div class="hero-float-card float-card-2">
+            <div class="float-icon caramel">☕</div>
+            <div class="float-text">
+              <h5>老時光手沖所</h5>
+              <p>留白午後的焙香陪伴</p>
             </div>
-          </article>
-          <article class="coffee-card reveal">
-            <div class="coffee-content">
-              <span class="coffee-number">02 / JUICY</span>
-              <p class="coffee-origin">KENYA · KIRINYAGA</p>
-              <h3>肯亞<br>祈安布</h3>
-              <p class="coffee-notes">黑醋栗、洛神、葡萄柚</p>
-              <div class="coffee-bottom"><span class="price">NT$ 580 / 200g</span><button class="add-button" type="button" data-coffee="肯亞・祈安布">加入收藏 ＋</button></div>
-            </div>
-          </article>
-          <article class="coffee-card reveal">
-            <div class="coffee-content">
-              <span class="coffee-number">03 / ROUND</span>
-              <p class="coffee-origin">COLOMBIA · HUILA</p>
-              <h3>哥倫比亞<br>慧蘭</h3>
-              <p class="coffee-notes">黃桃、焦糖、可可尾韻</p>
-              <div class="coffee-bottom"><span class="price">NT$ 460 / 200g</span><button class="add-button" type="button" data-coffee="哥倫比亞・慧蘭">加入收藏 ＋</button></div>
-            </div>
-          </article>
+          </div>
         </div>
       </div>
-    </section>
-
-    <section class="brew" id="brew" aria-labelledby="brewTitle">
-      <div class="brew-grid wrap">
-        <div class="brew-visual reveal" aria-hidden="true">
-          <div class="pour-ring"></div><div class="brew-v60"></div><p class="brew-caption">V60 / 15G : 240ML<br>2'45''</p>
-        </div>
-        <div class="reveal">
-          <p class="eyebrow">A QUIET RITUAL</p>
-          <h2 class="section-title" id="brewTitle">把時間交給水，<br>讓咖啡說<em>自己的話</em>。</h2>
-          <p class="section-copy">不需要繁複儀式，只要三個安靜的步驟。每一個參數，都是為了讓你更靠近豆子原本的樣子。</p>
-          <ol class="brew-steps">
-            <li><span class="step-no">01</span><span class="step-copy"><b>研磨，先聞見期待</b><span>15g 中細研磨，讓香氣從指尖開始展開。</span></span></li>
-            <li><span class="step-no">02</span><span class="step-copy"><b>悶蒸，等待第一個呼吸</b><span>以 92°C 熱水浸潤 30 秒，喚醒甜感與層次。</span></span></li>
-            <li><span class="step-no">03</span><span class="step-copy"><b>注水，保持自己的節奏</b><span>穩定畫圈，讓 240ml 的清澈在 2 分 45 秒完成。</span></span></li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <section class="visit" id="visit" aria-labelledby="visitTitle">
-      <div class="wrap reveal">
-        <p class="eyebrow">THE BLUE SKY LETTER</p>
-        <h2 class="section-title" id="visitTitle">把下一杯好咖啡，<br>寄到你的日常裡。</h2>
-        <p>每月一封風味通信，分享新豆、沖煮靈感與只給會員的小小驚喜。</p>
-        <form class="subscribe" id="subscribeForm">
-          <input type="email" aria-label="電子郵件地址" placeholder="留下你的 Email" required>
-          <button type="submit">訂閱風味通信</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footer-top wrap">
-      <div class="footer-brand"><a class="brand" href="#top"><span class="brand-mark">B</span><span>藍天咖啡<small>BLUE SKY COFFEE</small></span></a><p>為喜愛手沖咖啡的你，留下一段慢慢品味、微微放晴的時間。</p></div>
-      <div><p class="footer-heading">EXPLORE</p><ul class="footer-list"><li><a href="#story">我們的堅持</a></li><li><a href="#coffee">本季選豆</a></li><li><a href="#brew">沖煮日常</a></li></ul></div>
-      <div><p class="footer-heading">CONTACT</p><ul class="footer-list"><li><a href="mailto:hello@bluesky.coffee">hello@bluesky.coffee</a></li><li>台北市大安區晴朗路 18 號</li><li>每日 10:00 — 19:00</li></ul></div>
     </div>
-    <div class="footer-bottom wrap"><span>© 2026 BLUE SKY COFFEE. ALL RIGHTS RESERVED.</span><span>BREW SLOW · LIVE BRIGHT</span></div>
+  </section>
+
+  <!-- =========================================================
+       功能一：景點探索 (Attraction Exploration)
+  ========================================================= -->
+  <section class="explore-section" id="explore">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">DISCOVER PLACES</span>
+        <h2 class="section-title">城市景點探索</h2>
+        <p class="section-desc">從靜謐古樸的老巷弄到視野開闊的城市綠洲，依照心情切換主題，展開今日的微小冒險。</p>
+      </div>
+
+      <!-- 分類切換按鈕 -->
+      <div class="filter-bar" id="categoryFilterBar">
+        <button class="filter-chip active" data-cat="all">✨ 全部景點</button>
+        <button class="filter-chip" data-cat="old-house">🏛️ 老宅歷史</button>
+        <button class="filter-chip" data-cat="green-walk">🌲 綠意步道</button>
+        <button class="filter-chip" data-cat="art-culture">🎨 藝文聚落</button>
+        <button class="filter-chip" data-cat="sunset-view">🌅 展望秘境</button>
+      </div>
+
+      <!-- 景點卡片展示區 -->
+      <div class="grid-container" id="spotsGrid">
+        <!-- 由 JavaScript 動態渲染景點卡片 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       功能二：店家推薦 (Featured Shop Recommendations)
+  ========================================================= -->
+  <section class="shops-section" id="shops">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">CURATED SELECTION</span>
+        <h2 class="section-title">生活風格店家推薦</h2>
+        <p class="section-desc">尋訪深具靈魂的小店，在咖啡香、紙頁香與溫潤陶器中，感受主理人的手作溫度與日常執著。</p>
+      </div>
+
+      <!-- 主打店家特寫 -->
+      <article class="shop-feature-card">
+        <div class="shop-img-box">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=80" alt="蒔光珈琲館">
+          <span class="shop-badge">本月主理人推薦</span>
+        </div>
+        <div class="shop-content">
+          <div class="shop-meta">
+            <span>📍 台北市大同區赤峰街巷內</span>
+            <span>🕒 11:30 - 19:30 (週二休)</span>
+          </div>
+          <h3 class="shop-title">蒔光珈琲・老宅手焙專門</h3>
+          <p class="shop-quote">「在這裡，時間不是用秒針測量的，而是用一滴滴濾過濾紙的水滴。」</p>
+          <p class="shop-desc">
+            隱身在昔日打鐵街二樓的六十年老寓所，保留磨石子地與木窗框。店內以日式深焙水滴咖啡與手作焦糖香草布丁聞名，午後日光自老樹葉隙灑落，是最讓人心沉澱的城市防空洞。
+          </p>
+          <div class="shop-specialties">
+            <span class="specialty-tag">昭和硬布丁</span>
+            <span class="specialty-tag">日式法蘭絨手沖</span>
+            <span class="specialty-tag">自家烘焙淺中焙豆</span>
+            <span class="specialty-tag">安靜閱讀氛圍</span>
+          </div>
+          <div class="shop-actions">
+            <button class="btn-primary" onclick="toggleFavoriteShop('蒔光珈琲・老宅手焙專門', '台北市大同區赤峰街巷內', 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=400&q=80')">
+              ❤️ 收藏此店
+            </button>
+            <button class="btn-secondary" onclick="openShopModal('shikou')">查看更多照片與資訊</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 次推薦店家三欄網格 -->
+      <div class="shops-subgrid">
+        <!-- 店家 1 -->
+        <div class="sub-shop-card">
+          <span class="sub-shop-type">獨立二手書店・藝文沙龍</span>
+          <h4 class="sub-shop-title">野草時光書房</h4>
+          <p class="sub-shop-info">藏書以詩集、地方誌與人文藝術為主，走進挑高的檜木香書閣，每本書都附有店主細膩的手寫導讀短籤。</p>
+          <div class="sub-shop-foot">
+            <span class="sub-shop-hours">📍 台南市中西區 / 13:00-21:00</span>
+            <button class="card-btn-view" onclick="toggleFavoriteShop('野草時光書房', '台南市中西區', 'https://images.unsplash.com/photo-1507842229451-7f01be7ff612?auto=format&fit=crop&w=400&q=80')">＋ 收藏</button>
+          </div>
+        </div>
+
+        <!-- 店家 2 -->
+        <div class="sub-shop-card">
+          <span class="sub-shop-type">日式陶器・生活道具選物</span>
+          <h4 class="sub-shop-title">棲木道具所</h4>
+          <p class="sub-shop-info">專注於收錄台灣與日本職人親手捏製的生活器具。粗礪土質、木把湯匙，讓餐桌上的日常器物皆能歷久彌新。</p>
+          <div class="sub-shop-foot">
+            <span class="sub-shop-hours">📍 台中市西區 / 12:00-19:00</span>
+            <button class="card-btn-view" onclick="toggleFavoriteShop('棲木道具所', '台中市西區', 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=400&q=80')">＋ 收藏</button>
+          </div>
+        </div>
+
+        <!-- 店家 3 -->
+        <div class="sub-shop-card">
+          <span class="sub-shop-type">天然酵母烘焙・老木屋</span>
+          <h4 class="sub-shop-title">麥浪木坊麵包</h4>
+          <p class="sub-shop-info">以自養魯邦種酵母低溫發酵，每天下午兩點剛出爐的酸種歐包外脆內潤，伴隨著滿室麥香，是附近居民最溫馨的日常點心。</p>
+          <div class="sub-shop-foot">
+            <span class="sub-shop-hours">📍 宜蘭縣員山鄉 / 14:00-18:00</span>
+            <button class="card-btn-view" onclick="toggleFavoriteShop('麥浪木坊麵包', '宜蘭縣員山鄉', 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80')">＋ 收藏</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       功能三：旅人評價與即時心得 (Reviews & Community)
+  ========================================================= -->
+  <section class="review-section" id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">VOICES & STORIES</span>
+        <h2 class="section-title">旅人評價與回饋</h2>
+        <p class="section-desc">每一趟漫步，都是一段故事。閱讀旅人們的真實足跡，也歡迎寫下你的今日探訪心情。</p>
+      </div>
+
+      <div class="review-layout">
+        <!-- 左側：真實評價列表 -->
+        <div class="reviews-list" id="reviewsContainer">
+          <!-- 由 JS 渲染既有評價與使用者新增的評價 -->
+        </div>
+
+        <!-- 右側：填寫心得表單 -->
+        <div class="review-form-card">
+          <h3 class="form-title">分享你的探索筆記</h3>
+          <p class="form-desc">發現了令人驚豔的角落？填寫評價，讓更多風格探索者看見！</p>
+          
+          <form id="newReviewForm">
+            <div class="form-group">
+              <label class="form-label" for="reviewLocationSelect">評分景點或店家</label>
+              <select class="form-control" id="reviewLocationSelect" required>
+                <option value="">-- 請選擇欲評價的地點 --</option>
+                <option value="林家百年古厝綠廊">林家百年古厝綠廊 (老宅)</option>
+                <option value="翠微山間木棧步道">翠微山間木棧步道 (綠意)</option>
+                <option value="蒔光珈琲・老宅手焙專門">蒔光珈琲・老宅手焙專門 (咖啡)</option>
+                <option value="舊倉庫藝文實驗場">舊倉庫藝文實驗場 (藝文)</option>
+                <option value="夕照微風河畔堤防">夕照微風河畔堤防 (展望)</option>
+                <option value="野草時光書房">野草時光書房 (書店)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reviewerNameInput">旅人稱呼</label>
+              <input type="text" class="form-control" id="reviewerNameInput" placeholder="例如：安靜散步者、晴天旅人" required maxlength="15">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">探索星級評分</label>
+              <div class="star-rating-select" id="starRatingSelector">
+                <span class="star-btn" data-star="1">★</span>
+                <span class="star-btn" data-star="2">★</span>
+                <span class="star-btn" data-star="3">★</span>
+                <span class="star-btn" data-star="4">★</span>
+                <span class="star-btn" data-star="5">★</span>
+                <span class="rating-hint" id="ratingScoreText">5.0 分 (極度推薦)</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reviewContentInput">漫步心得與建議</label>
+              <textarea class="form-control" id="reviewContentInput" rows="4" placeholder="寫下當時的微光光景、必訪角度、私房停留推薦..." required maxlength="250"></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit-review">送出探索評價 ✍️</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       我的收藏抽屜 (Drawer: My Favorites)
+  ========================================================= -->
+  <div class="drawer-overlay" id="favDrawerOverlay">
+    <aside class="drawer" id="favDrawer">
+      <div class="drawer-header">
+        <h3 class="drawer-title">
+          <span>🔖 我的風格收藏清單</span>
+        </h3>
+        <button class="drawer-close" id="closeDrawerBtn" aria-label="關閉收藏清單">✕</button>
+      </div>
+
+      <div class="drawer-body" id="favItemsList">
+        <!-- 收藏清單將動態出現在此 -->
+      </div>
+
+      <div class="drawer-footer">
+        <button class="btn-secondary" style="width: 100%; justify-content: center;" onclick="clearAllFavorites()">清空全部收藏</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- =========================================================
+       景點詳細資訊彈窗 (Modal)
+  ========================================================= -->
+  <div class="modal-overlay" id="spotDetailModal">
+    <div class="modal-card">
+      <button class="modal-close" id="closeModalBtn">✕</button>
+      <img src="" alt="" class="modal-img-top" id="modalImg">
+      <div class="modal-body">
+        <span class="hero-tag" id="modalCategory" style="margin-bottom: 8px;">分類</span>
+        <h3 class="serif-font" id="modalTitle" style="font-size: 1.6rem; margin-bottom: 8px;">景點名稱</h3>
+        <p class="card-location" id="modalLocation" style="margin-bottom: 16px;">📍 地點資訊</p>
+        <p class="section-desc" id="modalDetail" style="margin-bottom: 20px; line-height: 1.8;">詳細描述</p>
+        <div style="background: var(--cream-bg); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--cream-border); margin-bottom: 20px;">
+          <h4 style="font-size: 0.9rem; margin-bottom: 8px; color: var(--grass-green-dark);">💡 探訪小提醒</h4>
+          <p id="modalTip" style="font-size: 0.85rem; color: var(--text-secondary);"></p>
+        </div>
+        <button class="btn-primary" id="modalFavBtn" style="width: 100%; justify-content: center;">加入我的收藏清單 ❤️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast 訊息浮條 -->
+  <div class="toast-box" id="toastBox">
+    <span id="toastIcon">✨</span>
+    <span id="toastMessage">已更新收藏</span>
+  </div>
+
+  <!-- =========================================================
+       頁尾 (Site Footer)
+  ========================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h4 class="serif-font">時光生活誌</h4>
+          <p>
+            專注於分享城市角落的美好景點與獨立店家。以輕鬆探索為核心，讓每位喜愛生活質感的漫遊者，都能拾獲心之所向的城市風景。
+          </p>
+        </div>
+        <div class="footer-col">
+          <h5>探索指南</h5>
+          <ul class="footer-links">
+            <li><a href="#explore">老宅與歷史街區</a></li>
+            <li><a href="#explore">綠意步道與公園</a></li>
+            <li><a href="#shops">獨立手沖咖啡小店</a></li>
+            <li><a href="#shops">生活道具與選品店</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>品牌理念</h5>
+          <ul class="footer-links">
+            <li><a href="#">風格宣言：清新・文青・簡約</a></li>
+            <li><a href="#">店家合作與引路提案</a></li>
+            <li><a href="#">探索者使用規範</a></li>
+            <li><a href="#">隱私權與服務條款</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 時光生活誌 (Chronicle of City Life). 簡約文青・城市生活風格誌.</span>
+        <span>設計色調：奶油白 ✕ 草綠 ✕ 焦糖棕</span>
+      </div>
+    </div>
   </footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <!-- =========================================================
+       核心互動邏輯 JavaScript
+  ========================================================= -->
   <script>
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.getElementById('navLinks');
-    menuToggle.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('open');
-      menuToggle.setAttribute('aria-expanded', open);
-      menuToggle.setAttribute('aria-label', open ? '關閉導覽選單' : '開啟導覽選單');
-      menuToggle.textContent = open ? '×' : '☰';
-    });
-    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.setAttribute('aria-label', '開啟導覽選單');
-      menuToggle.textContent = '☰';
-    }));
+    /* ---------------------------------------------------------
+       1. 景點與店家原始資料庫 (Data Model)
+    --------------------------------------------------------- */
+    const spotsData = [
+      {
+        id: "spot-1",
+        title: "林家百年古厝綠廊",
+        category: "old-house",
+        categoryName: "老宅歷史",
+        location: "台北市・文山區",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1548625361-195984620023?auto=format&fit=crop&w=700&q=80",
+        desc: "隱匿在市郊綠意山凹中的三合院紅磚厝，天井栽植老樟樹，清晨時分霧氣繚繞，能感受百年磚瓦留下的呼吸與古樸安詳。",
+        tags: ["紅磚老厝", "百年老樟", "寧靜茶座"],
+        tip: "上午 09:30 前遊客最少，光影自樹隙灑落在紅磚牆上極度適合底片攝影。"
+      },
+      {
+        id: "spot-2",
+        title: "翠微山間木棧步道",
+        category: "green-walk",
+        categoryName: "綠意步道",
+        location: "新北市・平溪區",
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=700&q=80",
+        desc: "沿著清澈溪澗鋪設的枕木步道，兩側覆滿青苔與高聳山蕨。耳畔盡是潺潺水流與竹林沙沙聲，是洗滌城市疲憊的最佳綠意森呼吸。",
+        tags: ["溪流步道", "蕨類森林", "負離子沐浴"],
+        tip: "步道平緩適合各年齡層散步，雨後微濕建議穿著防滑好走的布鞋。"
+      },
+      {
+        id: "spot-3",
+        title: "舊倉庫藝文實驗場",
+        category: "art-culture",
+        categoryName: "藝文聚落",
+        location: "高雄市・鹽埕區",
+        rating: 4.7,
+        image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=700&q=80",
+        desc: "臨港老倉庫群活化重生的當代創作基地，集結獨立刊物小展、絹印工作坊與手作皮革職人，週末經常舉行不插電草地音樂分享。",
+        tags: ["港邊微風", "展覽空間", "職人選物"],
+        tip: "傍晚時分可順道散步至港灣觀賞落日，吹海風看大船入港。"
+      },
+      {
+        id: "spot-4",
+        title: "夕照微風河畔堤防",
+        category: "sunset-view",
+        categoryName: "展望秘境",
+        location: "新北市・淡水河畔",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=80",
+        desc: "觀音山倒映在粼粼波光中的絕美視角。夕陽將天際染成焦糖與淡粉漸層，鋪一張野餐墊，帶上一杯熱茶，就能靜靜度過整個黃昏。",
+        tags: ["金色夕陽", "河畔微風", "野餐聖地"],
+        tip: "建議於日落前半小時抵達卡位，夏秋之交的晚霞色澤最為柔和。"
+      },
+      {
+        id: "spot-5",
+        title: "青石板巷弄手作坊",
+        category: "art-culture",
+        categoryName: "藝文聚落",
+        location: "新竹市・北區",
+        rating: 4.6,
+        image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=700&q=80",
+        desc: "鋪設舊青石板的小街道，聚攏了手工陶藝捏塑、植物藍染與乾燥花工作室。每一扇木門推開，都有專注打磨生活的溫潤身影。",
+        tags: ["手捏陶藝", "天然藍染", "慢活手作"],
+        tip: "多數手作體驗需要事先預約，若僅參觀選購則隨時歡迎步入。"
+      },
+      {
+        id: "spot-6",
+        title: "山嵐日出觀景台",
+        category: "sunset-view",
+        categoryName: "展望秘境",
+        location: "南投縣・鹿谷鄉",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80",
+        desc: "座落於茶園高處的木造平台，拂曉時刻雲海翻騰，晨曦自中央山脈頂端綻放光芒，呼吸間滿是山茶清香與晨露涼意。",
+        tags: ["晨曦雲海", "高山茶園", "壯麗視野"],
+        tip: "早晨氣溫較低需攜帶薄外套，秋季清晨遇見雲海機率極高。"
+      }
+    ];
 
-    const toast = document.getElementById('toast');
-    let toastTimer;
-    function showToast(message) {
-      window.clearTimeout(toastTimer);
-      toast.textContent = message;
-      toast.classList.add('show');
-      toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2600);
+    /* 既有旅人評價列表資料 */
+    let reviewsData = [
+      {
+        id: 1,
+        author: "林子芸",
+        spot: "蒔光珈琲・老宅手焙專門",
+        stars: 5,
+        date: "2026/09/28",
+        content: "午後點了深焙法蘭絨手沖配焦糖布丁，老屋光影真的很迷人！店裡播放的器樂讓人完全放鬆，已經列入每月必回訪清單。"
+      },
+      {
+        id: 2,
+        author: "郭哲宇",
+        spot: "林家百年古厝綠廊",
+        stars: 5,
+        date: "2026/09/25",
+        content: "非常安靜的世外桃源，紅磚牆面的質感特別好，老樟樹下的涼風吹拂令人忘記平日工作的煩躁，強烈推薦喜歡靜心的人。"
+      },
+      {
+        id: 3,
+        author: "陳詠涵",
+        spot: "野草時光書房",
+        stars: 4,
+        date: "2026/09/21",
+        content: "店主手寫的書籍註解太用心了，翻到很多主流書店找不到的詩集與獨立攝影集，整個人沉浸在紙頁香裡待了三小時。"
+      }
+    ];
+
+    /* ---------------------------------------------------------
+       2. 收藏清單狀態管理 (Favorites in LocalStorage)
+    --------------------------------------------------------- */
+    const STORAGE_KEY = "TOKI_JOURNAL_FAVORITES";
+
+    function getFavorites() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        return stored ? JSON.parse(stored) : [];
+      } catch (e) {
+        return [];
+      }
     }
-    document.querySelectorAll('[data-coffee]').forEach(button => button.addEventListener('click', () => {
-      showToast(`已將「${button.dataset.coffee}」加入你的收藏。`);
-    }));
-    document.getElementById('subscribeForm').addEventListener('submit', event => {
-      event.preventDefault();
-      event.currentTarget.reset();
-      showToast('謝謝訂閱，下一封晴朗的風味通信即將寄出。');
-    });
 
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const revealItems = document.querySelectorAll('.reveal');
-    if (reducedMotion || !('IntersectionObserver' in window)) {
-      revealItems.forEach(item => item.classList.add('visible'));
-    } else {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
+    function saveFavorites(favs) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
+      updateFavUI();
+    }
+
+    function isFavorited(idOrTitle) {
+      const favs = getFavorites();
+      return favs.some(item => item.id === idOrTitle || item.title === idOrTitle);
+    }
+
+    function toggleFavoriteSpot(spotId) {
+      const spot = spotsData.find(s => s.id === spotId);
+      if (!spot) return;
+
+      let favs = getFavorites();
+      const index = favs.findIndex(item => item.id === spotId);
+
+      if (index > -1) {
+        favs.splice(index, 1);
+        showToast("已從收藏清單中移除", "🗑️");
+      } else {
+        favs.push({
+          id: spot.id,
+          title: spot.title,
+          categoryName: spot.categoryName,
+          location: spot.location,
+          image: spot.image
+        });
+        showToast(`已將「${spot.title}」加入收藏清單！`, "❤️");
+      }
+
+      saveFavorites(favs);
+      renderSpots(currentFilteredCategory, currentSearchQuery);
+    }
+
+    function toggleFavoriteShop(title, location, image) {
+      let favs = getFavorites();
+      const index = favs.findIndex(item => item.title === title);
+
+      if (index > -1) {
+        favs.splice(index, 1);
+        showToast(`已取消收藏「${title}」`, "🗑️");
+      } else {
+        favs.push({
+          id: "shop-" + Date.now(),
+          title: title,
+          categoryName: "精選店家",
+          location: location,
+          image: image
+        });
+        showToast(`已將「${title}」加入風格店家收藏！`, "☕");
+      }
+
+      saveFavorites(favs);
+    }
+
+    function removeFavorite(itemId) {
+      let favs = getFavorites();
+      favs = favs.filter(item => item.id !== itemId);
+      saveFavorites(favs);
+      showToast("已移除收藏項目", "🗑️");
+      renderDrawerList();
+    }
+
+    function clearAllFavorites() {
+      if (getFavorites().length === 0) {
+        showToast("收藏清單目前是空的唷！", "ℹ️");
+        return;
+      }
+      if (confirm("確定要清空所有收藏清單嗎？")) {
+        saveFavorites([]);
+        showToast("已清空所有收藏", "✨");
+        renderDrawerList();
+        renderSpots(currentFilteredCategory, currentSearchQuery);
+      }
+    }
+
+    function updateFavUI() {
+      const favs = getFavorites();
+      const badge = document.getElementById("favCountBadge");
+      if (badge) {
+        badge.textContent = favs.length;
+      }
+      renderDrawerList();
+    }
+
+    function renderDrawerList() {
+      const container = document.getElementById("favItemsList");
+      if (!container) return;
+
+      const favs = getFavorites();
+      if (favs.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state" style="padding: 40px 10px;">
+            <div class="empty-state-icon">🔖</div>
+            <p style="font-weight: 600; color: var(--text-main); margin-bottom: 6px;">目前尚無收藏</p>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">瀏覽景點或店家時，點擊愛心或收藏按鈕，即可將感興趣的去處儲存於此。</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = favs.map(item => `
+        <div class="fav-item">
+          <img src="${item.image}" alt="${item.title}" class="fav-item-img">
+          <div class="fav-item-info">
+            <span class="fav-item-category">${item.categoryName || "城市探索"}</span>
+            <h4 class="fav-item-title">${item.title}</h4>
+            <p class="fav-item-loc">${item.location}</p>
+          </div>
+          <button class="fav-item-remove" onclick="removeFavorite('${item.id}')" title="移除收藏">✕</button>
+        </div>
+      `).join("");
+    }
+
+    /* ---------------------------------------------------------
+       3. 景點卡片渲染與搜尋篩選 (Spot Exploration Logic)
+    --------------------------------------------------------- */
+    let currentFilteredCategory = "all";
+    let currentSearchQuery = "";
+
+    function renderSpots(category = "all", query = "") {
+      const grid = document.getElementById("spotsGrid");
+      if (!grid) return;
+
+      let filtered = spotsData.filter(spot => {
+        const matchesCategory = (category === "all") || (spot.category === category);
+        const matchesQuery = !query || (
+          spot.title.toLowerCase().includes(query.toLowerCase()) ||
+          spot.desc.toLowerCase().includes(query.toLowerCase()) ||
+          spot.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ||
+          spot.location.toLowerCase().includes(query.toLowerCase())
+        );
+        return matchesCategory && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">🍃</div>
+            <h4 style="font-size: 1.1rem; margin-bottom: 8px;">沒有找到符合的探索景點</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
+              試試切換其他分類標籤，或是使用不同的關鍵字搜尋。
+            </p>
+            <button class="btn-secondary" onclick="resetFilters()">重置所有搜尋條件</button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(spot => {
+        const favorited = isFavorited(spot.id);
+        return `
+          <article class="card">
+            <div class="card-media">
+              <img src="${spot.image}" alt="${spot.title}" loading="lazy">
+              <span class="card-category-badge">${spot.categoryName}</span>
+              <button class="card-fav-toggle ${favorited ? "favorited" : ""}" 
+                      onclick="toggleFavoriteSpot('${spot.id}')" 
+                      title="${favorited ? "取消收藏" : "加入收藏"}">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="card-meta-top">
+                <span class="card-location">📍 ${spot.location}</span>
+                <span class="card-rating"><span class="star-icon">★</span> ${spot.rating}</span>
+              </div>
+              <h3 class="card-title">${spot.title}</h3>
+              <p class="card-desc">${spot.desc}</p>
+              <div class="card-tags">
+                ${spot.tags.map(t => `<span class="tag-item">#${t}</span>`).join("")}
+              </div>
+              <div class="card-footer">
+                <button class="card-btn-view" onclick="openSpotModal('${spot.id}')">
+                  細看故事 <span>→</span>
+                </button>
+                <span style="font-size: 0.76rem; color: var(--text-muted);">輕鬆散策</span>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function filterByTag(tagName) {
+      const searchInput = document.getElementById("heroSearchInput");
+      if (searchInput) searchInput.value = tagName;
+      currentSearchQuery = tagName;
+      renderSpots(currentFilteredCategory, currentSearchQuery);
+      document.getElementById("explore").scrollIntoView({ behavior: "smooth" });
+      showToast(`已篩選包含「#${tagName}」的景點`, "🔍");
+    }
+
+    function resetFilters() {
+      currentFilteredCategory = "all";
+      currentSearchQuery = "";
+      const searchInput = document.getElementById("heroSearchInput");
+      if (searchInput) searchInput.value = "";
+      
+      document.querySelectorAll(".filter-chip").forEach(chip => {
+        chip.classList.toggle("active", chip.dataset.cat === "all");
+      });
+      renderSpots("all", "");
+    }
+
+    /* ---------------------------------------------------------
+       4. 旅人評價系統與星級選擇 (Review & Rating System)
+    --------------------------------------------------------- */
+    let currentRatingSelection = 5;
+
+    function renderReviews() {
+      const container = document.getElementById("reviewsContainer");
+      if (!container) return;
+
+      container.innerHTML = reviewsData.map(r => `
+        <div class="review-item-card">
+          <div class="review-card-head">
+            <div class="reviewer-profile">
+              <div class="reviewer-avatar">${r.author.charAt(0)}</div>
+              <div>
+                <h4 class="reviewer-name">${r.author}</h4>
+                <span class="review-spot-name">探訪：${r.spot}</span>
+              </div>
+            </div>
+            <div class="review-stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</div>
+          </div>
+          <p class="review-text">「${r.content}」</p>
+          <div class="review-date">${r.date}</div>
+        </div>
+      `).join("");
+    }
+
+    function setupStarRating() {
+      const starBtns = document.querySelectorAll(".star-btn");
+      const hint = document.getElementById("ratingScoreText");
+
+      const hints = {
+        1: "1.0 分 (仍有改善空間)",
+        2: "2.0 分 (普通尚可)",
+        3: "3.0 分 (值得順道一訪)",
+        4: "4.0 分 (非常舒適推薦)",
+        5: "5.0 分 (極度推薦，必訪首選！)"
+      };
+
+      starBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const starVal = parseInt(btn.dataset.star);
+          currentRatingSelection = starVal;
+          updateStarVisuals(starVal);
+          hint.textContent = hints[starVal];
+        });
+
+        btn.addEventListener("mouseenter", () => {
+          const starVal = parseInt(btn.dataset.star);
+          starBtns.forEach(b => {
+            const bVal = parseInt(b.dataset.star);
+            b.classList.toggle("hover", bVal <= starVal);
+          });
+        });
+      });
+
+      const selectorContainer = document.getElementById("starRatingSelector");
+      if (selectorContainer) {
+        selectorContainer.addEventListener("mouseleave", () => {
+          updateStarVisuals(currentRatingSelection);
+        });
+      }
+
+      updateStarVisuals(currentRatingSelection);
+    }
+
+    function updateStarVisuals(score) {
+      const starBtns = document.querySelectorAll(".star-btn");
+      starBtns.forEach(b => {
+        const val = parseInt(b.dataset.star);
+        b.classList.toggle("active", val <= score);
+        b.classList.remove("hover");
+      });
+    }
+
+    /* ---------------------------------------------------------
+       5. 詳情彈窗 (Modal Interaction)
+    --------------------------------------------------------- */
+    let currentModalSpotId = null;
+
+    function openSpotModal(spotId) {
+      const spot = spotsData.find(s => s.id === spotId);
+      if (!spot) return;
+
+      currentModalSpotId = spotId;
+      document.getElementById("modalImg").src = spot.image;
+      document.getElementById("modalImg").alt = spot.title;
+      document.getElementById("modalCategory").textContent = spot.categoryName;
+      document.getElementById("modalTitle").textContent = spot.title;
+      document.getElementById("modalLocation").textContent = `📍 ${spot.location} ｜ 評價分數 ★ ${spot.rating}`;
+      document.getElementById("modalDetail").textContent = spot.desc;
+      document.getElementById("modalTip").textContent = spot.tip;
+
+      const modalFavBtn = document.getElementById("modalFavBtn");
+      const favorited = isFavorited(spot.id);
+      modalFavBtn.textContent = favorited ? "已在我的收藏中 ❤️ (點擊移除)" : "加入我的收藏清單 ❤️";
+      modalFavBtn.onclick = () => {
+        toggleFavoriteSpot(spot.id);
+        const nowFav = isFavorited(spot.id);
+        modalFavBtn.textContent = nowFav ? "已在我的收藏中 ❤️ (點擊移除)" : "加入我的收藏清單 ❤️";
+      };
+
+      document.getElementById("spotDetailModal").classList.add("active");
+    }
+
+    function openShopModal(shopKey) {
+      // 專門用於主理人店家介紹
+      document.getElementById("modalImg").src = "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80";
+      document.getElementById("modalImg").alt = "蒔光珈琲";
+      document.getElementById("modalCategory").textContent = "本月主理人推薦";
+      document.getElementById("modalTitle").textContent = "蒔光珈琲・老宅手焙專門";
+      document.getElementById("modalLocation").textContent = "📍 台北市大同區赤峰街巷內 ｜ 營業時間 11:30 - 19:30 (週二公休)";
+      document.getElementById("modalDetail").textContent = "以老舊打鐵街二樓的舊公寓改建，店內充滿歲月刻蝕的木紋與磨石子地板。除了招牌法蘭絨水滴手沖，每日限量出爐的焦糖海鹽生乳捲更是一絕。店內提供安靜閱讀座位，備有插座與輕柔爵士樂。";
+      document.getElementById("modalTip").textContent = "假日午後常需候位，建議平日下午兩點前前來，更能獨享安靜且陽光灑落的窗邊雅座。";
+      
+      const modalFavBtn = document.getElementById("modalFavBtn");
+      modalFavBtn.textContent = "收藏此精選好店 ❤️";
+      modalFavBtn.onclick = () => {
+        toggleFavoriteShop("蒔光珈琲・老宅手焙專門", "台北市大同區赤峰街巷內", "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=400&q=80");
+      };
+
+      document.getElementById("spotDetailModal").classList.add("active");
+    }
+
+    function closeModal() {
+      document.getElementById("spotDetailModal").classList.remove("active");
+    }
+
+    /* ---------------------------------------------------------
+       6. Toast 浮動提示
+    --------------------------------------------------------- */
+    let toastTimer = null;
+    function showToast(message, icon = "✨") {
+      const box = document.getElementById("toastBox");
+      const msg = document.getElementById("toastMessage");
+      const icn = document.getElementById("toastIcon");
+
+      if (!box) return;
+      msg.textContent = message;
+      icn.textContent = icon;
+      box.classList.add("show");
+
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        box.classList.remove("show");
+      }, 3000);
+    }
+
+    /* ---------------------------------------------------------
+       7. 頁面初始化與事件監聽綁定
+    --------------------------------------------------------- */
+    document.addEventListener("DOMContentLoaded", () => {
+      // 初始化收藏數量與景點列表
+      updateFavUI();
+      renderSpots();
+      renderReviews();
+      setupStarRating();
+
+      // 分類按鈕點擊監聽
+      const filterChips = document.querySelectorAll(".filter-chip");
+      filterChips.forEach(chip => {
+        chip.addEventListener("click", () => {
+          filterChips.forEach(c => c.classList.remove("active"));
+          chip.classList.add("active");
+          currentFilteredCategory = chip.dataset.cat;
+          renderSpots(currentFilteredCategory, currentSearchQuery);
+        });
+      });
+
+      // 搜尋按鈕與 Enter 鍵
+      const searchBtn = document.getElementById("heroSearchBtn");
+      const searchInput = document.getElementById("heroSearchInput");
+
+      const executeSearch = () => {
+        currentSearchQuery = searchInput.value.trim();
+        renderSpots(currentFilteredCategory, currentSearchQuery);
+        document.getElementById("explore").scrollIntoView({ behavior: "smooth" });
+      };
+
+      if (searchBtn) searchBtn.addEventListener("click", executeSearch);
+      if (searchInput) {
+        searchInput.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") executeSearch();
+        });
+      }
+
+      // 評價表單送出事件
+      const reviewForm = document.getElementById("newReviewForm");
+      if (reviewForm) {
+        reviewForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const spotSelect = document.getElementById("reviewLocationSelect");
+          const nameInput = document.getElementById("reviewerNameInput");
+          const contentInput = document.getElementById("reviewContentInput");
+
+          const newRev = {
+            id: Date.now(),
+            author: nameInput.value.trim(),
+            spot: spotSelect.value,
+            stars: currentRatingSelection,
+            date: "剛剛",
+            content: contentInput.value.trim()
+          };
+
+          // 加入評價最上方
+          reviewsData.unshift(newRev);
+          renderReviews();
+          showToast("感謝你的分享！評價已成功發布。", "🎉");
+
+          // 重設表單
+          reviewForm.reset();
+          currentRatingSelection = 5;
+          setupStarRating();
+        });
+      }
+
+      // 收藏抽屜開關
+      const openFavBtn = document.getElementById("openFavBtn");
+      const closeDrawerBtn = document.getElementById("closeDrawerBtn");
+      const favDrawerOverlay = document.getElementById("favDrawerOverlay");
+
+      if (openFavBtn) {
+        openFavBtn.addEventListener("click", () => {
+          favDrawerOverlay.classList.add("active");
+          renderDrawerList();
+        });
+      }
+
+      if (closeDrawerBtn) {
+        closeDrawerBtn.addEventListener("click", () => {
+          favDrawerOverlay.classList.remove("active");
+        });
+      }
+
+      if (favDrawerOverlay) {
+        favDrawerOverlay.addEventListener("click", (e) => {
+          if (e.target === favDrawerOverlay) {
+            favDrawerOverlay.classList.remove("active");
           }
         });
-      }, { threshold: .12 });
-      revealItems.forEach(item => observer.observe(item));
-    }
+      }
+
+      // Modal 關閉
+      const closeModalBtn = document.getElementById("closeModalBtn");
+      const spotDetailModal = document.getElementById("spotDetailModal");
+      if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+      if (spotDetailModal) {
+        spotDetailModal.addEventListener("click", (e) => {
+          if (e.target === spotDetailModal) closeModal();
+        });
+      }
+
+      // ESC 鍵關閉 Drawer 或 Modal
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          if (spotDetailModal) spotDetailModal.classList.remove("active");
+          if (favDrawerOverlay) favDrawerOverlay.classList.remove("active");
+        }
+      });
+
+      // 行動版漢堡選單切換
+      const mobileBtn = document.getElementById("mobileMenuBtn");
+      const navLinks = document.getElementById("navLinks");
+      if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener("click", () => {
+          navLinks.classList.toggle("open");
+        });
+        // 點擊連結後自動收起
+        navLinks.querySelectorAll("a").forEach(a => {
+          a.addEventListener("click", () => navLinks.classList.remove("open"));
+        });
+      }
+    });
   </script>
 </body>
 </html>
