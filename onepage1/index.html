@@ -267,17 +267,10 @@
 
     .brew { padding: 115px 0 120px; background: #fff; }
     .brew-grid { display: grid; grid-template-columns: .93fr 1.07fr; gap: clamp(44px, 7vw, 90px); align-items: center; }
-    .brew-art { position: relative; min-height: 448px; overflow: hidden; background: linear-gradient(138deg, #eef9fa 0 50%, #d6edf3 50% 100%); }
-    .brew-art::before { position: absolute; top: 33px; left: 30px; width: 70px; height: 35px; border-top: 1px solid var(--sky); border-left: 1px solid var(--sky); content: ""; }
-    .brew-art::after { position: absolute; top: 49px; left: 46px; width: 70px; height: 35px; border-top: 1px solid var(--sky); border-left: 1px solid var(--sky); content: ""; }
-    .pour-rings { position: absolute; top: 50%; left: 50%; width: 238px; height: 238px; border: 1px solid rgba(12,91,149,.35); border-radius: 50%; transform: translate(-50%,-46%); }
-    .pour-rings::before, .pour-rings::after { position: absolute; border: 1px solid rgba(12,91,149,.28); border-radius: 50%; content: ""; }
-    .pour-rings::before { inset: 27px; }
-    .pour-rings::after { inset: 57px; }
-    .pour-line { position: absolute; top: 39px; left: 50%; width: 1px; height: 140px; background: var(--blue); transform: rotate(24deg); transform-origin: bottom; }
-    .v60 { position: absolute; top: 50%; left: 50%; width: 140px; height: 105px; border: 3px solid var(--navy); border-top-width: 4px; background: rgba(255,255,255,.7); clip-path: polygon(0 0, 100% 0, 74% 100%, 26% 100%); transform: translate(-50%,-33%); }
-    .v60::after { position: absolute; bottom: -61px; left: 35px; width: 64px; height: 58px; border: 3px solid var(--navy); border-radius: 8px 8px 19px 19px; background: linear-gradient(to top, #6c3924 0 31%, rgba(255,255,255,.5) 32%); content: ""; }
-    .brew-caption { position: absolute; right: 27px; bottom: 25px; display: grid; color: var(--navy); text-align: right; }
+    .brew-art { position: relative; width: 400px; height: 300px; min-height: 0; overflow: hidden; background: var(--mist); }
+    .brew-photo { display: block; width: 400px; height: 300px; object-fit: cover; object-position: center; filter: saturate(.86) contrast(.96); }
+    .brew-art::after { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,39,66,0) 45%, rgba(6,39,66,.58)); content: ""; pointer-events: none; }
+    .brew-caption { position: absolute; z-index: 1; right: 27px; bottom: 25px; display: grid; color: #fff; text-align: right; }
     .brew-caption strong { font-family: "Playfair Display", serif; font-size: 21px; letter-spacing: .05em; }
     .brew-caption span { font-size: 10px; font-weight: 700; letter-spacing: .12em; }
     .brew-content .section-copy { max-width: 530px; }
@@ -359,7 +352,7 @@
       .coffee-card:nth-child(3) { grid-column: span 2; }
       .story-grid, .brew-grid { grid-template-columns: 1fr; }
       .story-visual { max-width: 520px; width: 100%; margin: auto; }
-      .brew-art { max-width: 540px; width: 100%; margin: auto; }
+      .brew-art { margin: auto; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .footer-brand { grid-column: 1 / -1; }
     }
@@ -392,9 +385,7 @@
       .coffee-heading .section-copy { margin-top: 14px; }
       .coffee-grid { grid-template-columns: 1fr; }
       .coffee-card, .coffee-card:nth-child(3) { min-height: 330px; grid-column: auto; }
-      .brew-art { min-height: 310px; }
-      .pour-rings { width: 185px; height: 185px; }
-      .v60 { transform: translate(-50%,-28%) scale(.82); }
+      .brew-art, .brew-photo { width: 100%; height: auto; aspect-ratio: 4 / 3; }
       .subscribe-form { display: grid; gap: 6px; padding: 5px; }
       .subscribe-form input, .subscribe-form button { width: 100%; }
       .footer-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -502,7 +493,7 @@
     <section class="brew" id="brew" aria-labelledby="brewTitle">
       <div class="wrap brew-grid">
         <div class="brew-art reveal" aria-hidden="true">
-          <span class="pour-rings"></span><span class="pour-line"></span><span class="v60"></span>
+          <img class="brew-photo" src="images/hero.jpg" width="400" height="300" alt="">
           <span class="brew-caption"><strong>2'45''</strong><span>V60 / 15G : 240ML</span></span>
         </div>
         <div class="brew-content reveal">
